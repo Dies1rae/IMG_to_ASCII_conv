@@ -88,41 +88,49 @@ void FS::convert_to_ascii(file* N) {
 	
 	cv::Mat ph = cv::imread(N->get_name(), cv::IMREAD_GRAYSCALE);
 	cv::Mat resized;
-	resize(ph, resized, cv::Size(500, 600));
+	if (ph.cols < ph.rows) {
+		resize(ph, resized, cv::Size(int(ph.cols / 5), int(ph.rows / 5)));
+	}
+	else if (ph.cols > ph.rows) {
+		resize(ph, resized, cv::Size(int(ph.cols / 5), int(ph.rows / 5)));
+	}
+	else {
+		resize(ph, resized, cv::Size(int(ph.cols / 5), int(ph.rows / 5)));
+	}
 	for (int ptrROW = 0; ptrROW < resized.rows; ptrROW++) {
 		for (int ptrCOL = 0; ptrCOL < resized.cols; ptrCOL++) {
 			cv::Scalar pix = resized.at<uchar>(cv::Point(ptrCOL, ptrROW));
 			//cout << pix[0]<< ':' << pix[1] << ':' << pix[2] << ' ';
 			//cout << pix.val[0]<< ':' << pix.val[1] << ':' << pix.val[2] << ' ';
 			if (pix[0] >= 0 && pix[0] <= 25) {
-				convouttxt << ' ';
+				convouttxt << '@';
 			}
 			if (pix[0] >= 26 && pix[0] <= 51) {
-				convouttxt << '.';
+					convouttxt << '%'; 
 			}
 			if (pix[0] >= 52 && pix[0] <= 77) {
-				convouttxt << ':';
+				convouttxt << '#'; 
 			}
 			if (pix[0] >= 78 && pix[0] <= 103) {
-				convouttxt << '-';
-			}
+				convouttxt << '*'; 
+				}
 			if (pix[0] >= 104 && pix[0] <= 129) {
-				convouttxt << '=';
+				convouttxt << '+'; 
 			}
 			if (pix[0] >= 130 && pix[0] <= 155) {
-				convouttxt << '+';
-			}
+				convouttxt << '='; 
+				}
 			if (pix[0] >= 156 && pix[0] <= 181) {
-				convouttxt << '*';
+				convouttxt << '-'; 
 			}
 			if (pix[0] >= 182 && pix[0] <= 207) {
-				convouttxt << '#';
-			}
+				convouttxt << ':'; 
+				}
 			if (pix[0] >= 208 && pix[0] <= 233) {
-				convouttxt << '%';
+				convouttxt << '.'; 
 			}
 			if (pix[0] > 233) {
-				convouttxt << '@';
+				convouttxt << ' '; 
 			}
 		}
 		convouttxt << '\n';
