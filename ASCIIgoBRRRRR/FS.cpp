@@ -64,16 +64,14 @@ void FS::run() {
 		Sleep(1000);
 		collect_files();
 		if (this->files.size() > 0) {
-			Sleep(2000);
-			std::cout << "Collected from in: " << std::endl;
+			std::cout << "Collected from *in*: " << std::endl;
 			for (auto ptr : this->files) { std::cout << ptr.get_name() << ':' << ptr.get_state() << std::endl; }
+			Sleep(3000);
 			convert_to_ascii(&this->files[0]);
-			Sleep(2000);
 		}
 		else {
-			std::cout << "**Waiting for files - pidor**" << std::endl;
+			std::cout << "**Waiting for files**" << std::endl;
 			Sleep(2000);
-			collect_files();
 		}
 		Sleep(1000);
 		system("CLS");
@@ -133,4 +131,6 @@ void FS::convert_to_ascii(file* N) {
 	convouttxt.close();
 	N->set_state(false);
 	delete_file();
+	std::cout << " **CONVERTING DONE** " << std::endl;
+	Sleep(3000);
 }
