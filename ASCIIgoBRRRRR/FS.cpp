@@ -4,6 +4,10 @@
 #include <filesystem>
 #include <vector>
 #include <Windows.h>
+#include <fstream>
+#include "opencv2/opencv.hpp"
+
+
 namespace fs = std::filesystem;
 
 void FS::set_state(int PTR, bool S) {
@@ -23,6 +27,9 @@ void FS::delete_file() {
 	std::vector<file>::iterator ptrIT;
 	for (ptrIT = this->files.begin(); ptrIT != this->files.end();) {
 		if (ptrIT->get_state() == 0) {
+			for (auto& F : fs::recursive_directory_iterator(this->path_in)) {
+				fs::remove(ptrIT->get_name());
+			}
 			ptrIT = this->files.erase(ptrIT);
 		}
 		else {
@@ -55,6 +62,7 @@ bool FS::find(file N) {
 void FS::run() {
 	while (true) {
 		Sleep(1000);
+		collect_files();
 		if (this->files.size() > 0) {
 			Sleep(2000);
 			std::cout << "Collected from in: " << std::endl;
@@ -63,20 +71,66 @@ void FS::run() {
 			Sleep(2000);
 		}
 		else {
-			std::cout << "**Waiting for files**" << std::endl;
+			std::cout << "**Waiting for files - pidor**" << std::endl;
 			Sleep(2000);
 			collect_files();
 		}
 		Sleep(1000);
-		delete_file();
 		system("CLS");
 	}
 }
 
 
 void FS::convert_to_ascii(file* N) {
-	Sleep(2000);
-	std::cout << " **CONVERTING FUCK YOURSELF** " << std::endl;
+	std::cout << " **CONVERTING** " << std::endl;
+	std::string txtfilename = this->path_out;
+	txtfilename += N->get_name().substr(N->get_name().find_last_of("/\\"),N->get_name().find_last_of(".") - N->get_name().find_last_of("/\\"));
+	txtfilename += ".txt";
+	std::ofstream convouttxt(txtfilename);
+	
+	cv::Mat ph = cv::imread(N->get_name(), cv::IMREAD_GRAYSCALE);
+	cv::Mat resized;
+	resize(ph, resized, cv::Size(500, 600));
+	for (int ptrROW = 0; ptrROW < resized.rows; ptrROW++) {
+		for (int ptrCOL = 0; ptrCOL < resized.cols; ptrCOL++) {
+			cv::Scalar pix = resized.at<uchar>(cv::Point(ptrCOL, ptrROW));
+			//cout << pix[0]<< ':' << pix[1] << ':' << pix[2] << ' ';
+			//cout << pix.val[0]<< ':' << pix.val[1] << ':' << pix.val[2] << ' ';
+			if (pix[0] >= 0 && pix[0] <= 25) {
+				convouttxt << ' ';
+			}
+			if (pix[0] >= 26 && pix[0] <= 51) {
+				convouttxt << '.';
+			}
+			if (pix[0] >= 52 && pix[0] <= 77) {
+				convouttxt << ':';
+			}
+			if (pix[0] >= 78 && pix[0] <= 103) {
+				convouttxt << '-';
+			}
+			if (pix[0] >= 104 && pix[0] <= 129) {
+				convouttxt << '=';
+			}
+			if (pix[0] >= 130 && pix[0] <= 155) {
+				convouttxt << '+';
+			}
+			if (pix[0] >= 156 && pix[0] <= 181) {
+				convouttxt << '*';
+			}
+			if (pix[0] >= 182 && pix[0] <= 207) {
+				convouttxt << '#';
+			}
+			if (pix[0] >= 208 && pix[0] <= 233) {
+				convouttxt << '%';
+			}
+			if (pix[0] > 233) {
+				convouttxt << '@';
+			}
+		}
+		convouttxt << '\n';
+	}
+
+	convouttxt.close();
 	N->set_state(false);
-	Sleep(3000);
+	delete_file();
 }

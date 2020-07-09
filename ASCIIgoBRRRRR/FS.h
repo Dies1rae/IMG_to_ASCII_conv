@@ -5,6 +5,9 @@
 #include <string>
 #include <filesystem>
 #include <vector>
+#include "opencv2/opencv.hpp"
+
+
 namespace fs = std::filesystem;
 
 class FS{
@@ -23,6 +26,7 @@ public:
 	void delete_file();
 	void collect_files();
 	void convert_to_ascii(file* N);
+	void opencv_con(file* N);
 	//server methods to separate file class elem in vector of file
 	void set_state(int PTR, bool S);
 	bool get_state(int PTR);
