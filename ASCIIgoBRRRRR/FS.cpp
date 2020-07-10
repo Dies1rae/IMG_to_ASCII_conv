@@ -75,17 +75,17 @@ void FS::run() {
 			convert_to_ascii(&this->files[0]);
 		}
 		else {
-			std::cout << "**Waiting for files**" << std::endl;
-			Sleep(2000);
+			std::cout << "**ALL DONE**" << std::endl;
+			std::cout << "**WAITING**" << std::endl;
+			Sleep(3000);
 		}
-		Sleep(1000);
 		system("CLS");
 	}
 }
 
 
 void FS::convert_to_ascii(file* N) {
-	this->main_log->add_log_string("CONVERTING START" + N->get_name());
+	this->main_log->add_log_string("CONVERTING START::" + N->get_name());
 	std::cout << " **CONVERTING** " << std::endl;
 	std::string txtfilename = this->path_out;
 	txtfilename += N->get_name().substr(N->get_name().find_last_of("/\\"),N->get_name().find_last_of(".") - N->get_name().find_last_of("/\\"));
@@ -147,10 +147,8 @@ void FS::convert_to_ascii(file* N) {
 	convouttxt.close();
 	N->set_state(false);
 	delete_file();
-	this->main_log->add_log_string("CONVERTING DONE " + N->get_name());
+	this->main_log->add_log_string("CONVERTING DONE::" + N->get_name());
 	std::cout << " **CONVERTING DONE** " << std::endl;
-	Sleep(2000);
 	std::cout << "**write logs**" << std::endl;
 	this->main_log->write_to_file();
-	Sleep(3000);
 }

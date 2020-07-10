@@ -157,6 +157,7 @@
     <ClInclude Include="file.h" />
     <ClInclude Include="FS.h" />
     <ClInclude Include="logg.h" />
+    <ClInclude Include="Menu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
