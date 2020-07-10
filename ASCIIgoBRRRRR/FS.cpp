@@ -7,7 +7,6 @@
 #include <fstream>
 #include "opencv2/opencv.hpp"
 
-
 namespace fs = std::filesystem;
 
 void FS::set_state(int PTR, bool S) {
@@ -88,15 +87,7 @@ void FS::convert_to_ascii(file* N) {
 	
 	cv::Mat ph = cv::imread(N->get_name(), cv::IMREAD_GRAYSCALE);
 	cv::Mat resized;
-	if (ph.cols < ph.rows) {
-		resize(ph, resized, cv::Size(int(ph.cols / 5), int(ph.rows / 5)));
-	}
-	else if (ph.cols > ph.rows) {
-		resize(ph, resized, cv::Size(int(ph.cols / 5), int(ph.rows / 5)));
-	}
-	else {
-		resize(ph, resized, cv::Size(int(ph.cols / 5), int(ph.rows / 5)));
-	}
+	resize(ph, resized, cv::Size(int(ph.cols / 5), int(ph.rows / 5)));
 	for (int ptrROW = 0; ptrROW < resized.rows; ptrROW++) {
 		for (int ptrCOL = 0; ptrCOL < resized.cols; ptrCOL++) {
 			cv::Scalar pix = resized.at<uchar>(cv::Point(ptrCOL, ptrROW));
