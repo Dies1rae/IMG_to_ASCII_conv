@@ -100,8 +100,6 @@ void FS::convert_to_ascii(file* N) {
 	for (int ptrROW = 0; ptrROW < resized.rows; ptrROW++) {
 		for (int ptrCOL = 0; ptrCOL < resized.cols; ptrCOL++) {
 			cv::Scalar pix = resized.at<uchar>(cv::Point(ptrCOL, ptrROW));
-			//cout << pix[0]<< ':' << pix[1] << ':' << pix[2] << ' ';
-			//cout << pix.val[0]<< ':' << pix.val[1] << ':' << pix.val[2] << ' ';
 			if (pix[0] >= 0 && pix[0] <= 25) {
 				convouttxt << '@';
 			}
