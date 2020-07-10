@@ -16,11 +16,11 @@ private:
 	std::string path_out;//path to output
 	std::string mask; //what files look
 	std::vector<file> files;
-	logg* main_log;
+	logg * main_log;
 public:
 	//build
 	FS(std::string P_in, std::string P_out, std::string M):path_in(P_in), path_out(P_out), mask(M), files(), main_log() {}
-
+	void init(logg* L);
 	void run();
 	//server methods
 	void delete_file();

@@ -1,0 +1,26 @@
+Begin
+Fri Jul 10 18:46:37 2020
+:::::INIT DONE
+Fri Jul 10 18:46:37 2020
+:::::SERVER START
+Fri Jul 10 18:46:53 2020
+:::::CONVERTING STARTC:\Users\n.poltavskiy\Source\Repos\ASCIIgoBRRRRR\x64\Release\in\77.jpg
+Fri Jul 10 18:46:53 2020
+:::::CONVERTING DONE C:\Users\n.poltavskiy\Source\Repos\ASCIIgoBRRRRR\x64\Release\in\871.jpg
+FinishingFri Jul 10 18:47:03 2020
+:::::CONVERTING STARTC:\Users\n.poltavskiy\Source\Repos\ASCIIgoBRRRRR\x64\Release\in\871.jpg
+Fri Jul 10 18:47:04 2020
+:::::CONVERTING DONE C:\Users\n.poltavskiy\Source\Repos\ASCIIgoBRRRRR\x64\Release\in\cat.jpg
+FinishingFri Jul 10 18:47:14 2020
+:::::CONVERTING STARTC:\Users\n.poltavskiy\Source\Repos\ASCIIgoBRRRRR\x64\Release\in\cat.jpg
+Fri Jul 10 18:47:14 2020
+:::::CONVERTING DONE C:\Users\n.poltavskiy\Source\Repos\ASCIIgoBRRRRR\x64\Release\in\novozhilov.jpg
+FinishingFri Jul 10 18:47:24 2020
+:::::CONVERTING STARTC:\Users\n.poltavskiy\Source\Repos\ASCIIgoBRRRRR\x64\Release\in\novozhilov.jpg
+Fri Jul 10 18:47:24 2020
+:::::CONVERTING DONE C:\Users\n.poltavskiy\Source\Repos\ASCIIgoBRRRRR\x64\Release\in\timur.jpg
+FinishingFri Jul 10 18:47:34 2020
+:::::CONVERTING STARTC:\Users\n.poltavskiy\Source\Repos\ASCIIgoBRRRRR\x64\Release\in\timur.jpg
+Fri Jul 10 18:47:34 2020
+:::::CONVERTING DONE 
+Finishing

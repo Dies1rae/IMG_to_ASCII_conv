@@ -1,18 +1,28 @@
+#define _CRT_SECURE_NO_WARNINGS
 #pragma once
 #include <iostream>
-#include <time.h>
+#include <ctime>
+#include <chrono>
+#include <iomanip>
 #include <string>
+#include <fstream>
 #include <vector>
+
 class logg{
 private:
+	std::string logpath;
 	std::vector<std::string> logd;
 public:
 	logg(){
-		this->logd = { "begin" };
+		logpath = "log.txt";
+		this->logd.push_back("begin");
 	}
-	logg(std::string S) { logd.push_back(S); }
+	logg(std::string mess) {
+		logpath = "log.txt";
+		this->logd.push_back(mess);
+	}
 	~logg(){}
-
-	void write_to_file(std::string filepath);
+	void add_log_string(std::string L);
+	void write_to_file();
 };
 

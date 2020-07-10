@@ -58,7 +58,13 @@ bool FS::find(file N) {
 	return true;
 }
 
+void FS::init(logg * L) {
+	this->main_log = L;
+	this->main_log->add_log_string("INIT DONE");
+}
+
 void FS::run() {
+	this->main_log->add_log_string("SERVER START");
 	while (true) {
 		Sleep(1000);
 		collect_files();
@@ -79,6 +85,7 @@ void FS::run() {
 
 
 void FS::convert_to_ascii(file* N) {
+	this->main_log->add_log_string("CONVERTING START" + N->get_name());
 	std::cout << " **CONVERTING** " << std::endl;
 	std::string txtfilename = this->path_out;
 	txtfilename += N->get_name().substr(N->get_name().find_last_of("/\\"),N->get_name().find_last_of(".") - N->get_name().find_last_of("/\\"));
@@ -94,7 +101,10 @@ void FS::convert_to_ascii(file* N) {
 			if (pix[0] >= 0 && pix[0] <= 25) {
 				convouttxt << '@';
 			}
-			if (pix[0] >= 26 && pix[0] <= 51) {
+			if (pix[0] >= 26 && pix[0] <= 35) {
+				convouttxt << '&';
+			}
+			if (pix[0] >= 36 && pix[0] <= 51) {
 					convouttxt << '%'; 
 			}
 			if (pix[0] >= 52 && pix[0] <= 77) {
@@ -109,13 +119,22 @@ void FS::convert_to_ascii(file* N) {
 			if (pix[0] >= 130 && pix[0] <= 155) {
 				convouttxt << '='; 
 				}
-			if (pix[0] >= 156 && pix[0] <= 181) {
+			if (pix[0] >= 156 && pix[0] <= 169) {
+				convouttxt << '~';
+			}
+			if (pix[0] >= 170 && pix[0] <= 181) {
 				convouttxt << '-'; 
 			}
-			if (pix[0] >= 182 && pix[0] <= 207) {
+			if (pix[0] >= 182 && pix[0] <= 190) {
+				convouttxt << 'l';
+			}
+			if (pix[0] >= 191 && pix[0] <= 207) {
 				convouttxt << ':'; 
-				}
-			if (pix[0] >= 208 && pix[0] <= 233) {
+			}
+			if (pix[0] >= 208 && pix[0] <= 220) {
+				convouttxt << ',';
+			}
+			if (pix[0] >= 221 && pix[0] <= 233) {
 				convouttxt << '.'; 
 			}
 			if (pix[0] > 233) {
@@ -128,6 +147,10 @@ void FS::convert_to_ascii(file* N) {
 	convouttxt.close();
 	N->set_state(false);
 	delete_file();
+	this->main_log->add_log_string("CONVERTING DONE " + N->get_name());
 	std::cout << " **CONVERTING DONE** " << std::endl;
+	Sleep(2000);
+	std::cout << "**write logs**" << std::endl;
+	this->main_log->write_to_file();
 	Sleep(3000);
 }
